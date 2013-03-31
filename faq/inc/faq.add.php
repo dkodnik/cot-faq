@@ -20,7 +20,7 @@ $rquestion['question_text'] = cot_import('rquestiontext', 'P', 'TXT');
 $rquestion['question_approved'] = 0;
 $rquestion['question_cat'] = $c;
 
-if($user['id'] == 0 && !empty($cot_captcha))
+if($usr['id'] == 0 && !empty($cot_captcha))
 {
 	$rverify = cot_captcha_validate(cot_import('rverify', 'P', 'TXT'));
 	if(!$rverify)
