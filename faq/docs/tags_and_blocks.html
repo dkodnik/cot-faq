@@ -1,0 +1,446 @@
+<html>
+
+	<head>
+		<title>Available Tags and Blocks</title>
+		<style>
+			html,body {
+				background-color: #eee;
+				padding: 0px;
+				margin: 0px;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 13px;
+			}
+			div {
+				padding: 0px;
+				margin: 0px;
+			}
+			.container {
+				background-color: #fff;
+				margin-left: auto;
+				margin-right: auto;
+				width: 1000px;
+				margin-top: 15px;
+				margin-bottom: 30px;
+				overflow: hidden;
+				border-radius: 4px;
+				padding-top: 5px;
+				padding-bottom: 15px;
+			}
+			.left-block {
+				float: left;
+				width: 29%;
+				margin-right: 10px;
+			}
+			.right-block {
+				float: left;
+				width: 68%;
+			}
+			.menu {
+				margin-top: 10px;
+				margin-bottom: 20px;
+				border-bottom: 1px solid #d7d7d7;
+			}
+			.menu-top {
+				padding: 6px;
+				background-color: #89bfe2;
+				border: 1px solid #89bfe2;
+				border-top-left-radius: 4px;
+				border-top-right-radius: 4px;
+				color: #012d48;
+				font-weight: bold;
+				font-size: 13px;
+
+			}
+			.menu-body {
+				background-color: #eeeeee;
+				padding: 0px;
+				margin: 0px;
+			}
+			a {
+				color: #0079C1;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			h1.title {
+				margin-top: 30px;
+				width: 1000px;
+				color: #666;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			h2 {
+				color: #0072b6;
+				margin-top: 5px;
+				font-size: 17px;
+				font-weight: normal;
+			}
+			h3 {
+				margin: 0px;
+				padding-top: 10px;
+			}
+			table {
+				margin: 0px;
+				padding: 0px;
+				width: 100%;
+			}
+			td.coltop {
+				background-color: #ddd;
+				padding: 5px;
+				padding-top: 12px;
+				padding-bottom: 12px;
+				font-size: 13px;
+				color: #444444;
+				font-weight: bold;
+				font-family: sans-serif;
+			}
+			table {
+				border-spacing: 0px;
+				border-collapse: collapse;
+			}
+			td.cell {
+				background-color: #eee;
+				padding: 10px;
+				padding-right: 5px;
+				padding-left: 5px;
+				color: #666;
+				font-size: 13px;
+
+			}
+			.block {
+				margin-top: 25px;
+				margin-right: 10px;
+				margin-left: 10px;
+			}
+			ul.link-list {
+				padding: 0px;
+				padding-left: 10px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin: 0px;
+				line-height: 2.5;
+				overflow: hidden;
+			}
+			li {
+				margin: 0px;
+				padding: 0px;
+				float: left;
+				margin-right: 25px;
+				width: 25%;
+			}
+			.coltopleft {
+				border-top-left-radius: 4px;
+			}
+			.coltopright {
+				border-top-right-radius: 4px;
+			}
+			.block-title {
+				border-bottom: 1px solid #ccc;
+			}
+			.block-sep {
+				border-top: 2px solid #fff;
+			}
+			p {
+				padding-bottom: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 class="title"><span style="color: #f7a32d;">FAQ</span> - Available Tags</h1>
+		<div class="container">
+			<div class="block">
+				<div class="menu">
+					<div class="menu-top">
+						Blocks
+					</div>
+					<div class="menu-body">
+						<ul class="link-list">
+							<li><a href="#MAIN">MAIN</a></li>							
+							<li><a href="#MAIN.FAQ_CATEGORIES">MAIN.FAQ_CATEGORIES</a></li>
+							<li><a href="#MAIN.FAQ_LIST_QUESTIONS">MAIN.FAQ_LIST_QUESTIONS</a></li>
+							<li><a href="#MAIN.FAQ_QUESTION_ADD">MAIN.FAQ_QUESTION_ADD</a></li>
+							<li><a href="#MAIN.FAQ_QUESTION_ADD.GUEST">MAIN.FAQ_QUESTION_ADD.GUEST</a></li>
+							<li><a href="#MAIN.FAQ_QUESTIONS_AND_ANSWERS">MAIN.FAQ_QUESTIONS_AND_ANSWERS</a></li>
+<li><a href="#MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN">MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="block">
+				<h2 id="hybridauth_tpl">faq.tpl</h2>
+				<table cellspacing="0">
+					<tr>
+						<td style="width: 40%;" class="coltop coltopleft">Tag name</td>
+						<td style="width: 25%;" class="coltop">In Block</td>
+						<td style="width: 35%;" class="coltop coltopright">Description</td>
+					</tr>
+					<tr>
+						<td class="cell" colspan="3">
+							<h3 id="MAIN">MAIN</h3>
+							<p>The main block</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_PATH}</td>
+						<td class="cell">MAIN</td>
+						<td class="cell">Breadcrumb path</td>
+					</tr>										
+					<tr>
+						<td class="cell">{FAQ_TITLE}</td>
+						<td class="cell">MAIN</td>
+						<td class="cell">The title of the module</td>
+					</tr>
+					<tr>
+						<td class="cell block-sep" colspan="3">
+							<h3 id="MAIN.FAQ_CATEGORIES">MAIN.FAQ_CATEGORIES</h3>
+							<p>A list of FAQ subcategories for the current category</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_ID}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">The category's ID in the structure table</td>
+					</tr>										
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_DESC}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">The category's description</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_TITLE}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">The title of the category</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_ICON_URL}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">URL of the category's icon</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_CODE}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">The category's unique code</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_QUESTION_COUNT}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">The count of the questions only in the category</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_CATEGORY_QUESTION_COUNT_TOTAL}</td>
+						<td class="cell">MAIN.FAQ_CATEGORIES</td>
+						<td class="cell">The total count of the questions in this category and its children</td>
+					</tr>
+					<tr>
+						<td class="cell block-sep" colspan="3">
+							<h3 id="MAIN.FAQ_LIST_QUESTIONS">MAIN.FAQ_LIST_QUESTIONS</h3>
+							<p>A complete list of questions for the current category</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_ID}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The ID of the question in the questions table</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_ORDER}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The order number when output</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_TEXT}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The raw text of the question</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_URL}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The URL to the question on the page</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_USER_NAME}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The user name of the question poster</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_USER_EMAIL}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The email address of the question poster</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_ADDED_DATE}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The question's date formated of when it was added</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_ADDED_TIMESTAMP}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The question's timestamp of when it was added</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_CATEGORY_TITLE}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The title of the category the question is in</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_CATEGORY_CODE}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The unique code of the category the question is in</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_LINK}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">The question text formated into a link from a resource</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_LIST_QUESTION_LINK_WITHORDER}</td>
+						<td class="cell">MAIN.FAQ_LIST_QUESTIONS</td>
+						<td class="cell">the question text formated into a link from a resource with the question order number</td>
+					</tr>
+					<tr>
+						<td class="cell block-sep" colspan="3">
+							<h3 id="MAIN.FAQ_QUESTIONS_AND_ANSWERS">MAIN.FAQ_QUESTIONS_AND_ANSWERS</h3>
+							<p>A complete list of questions and answers for the current category</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_ID}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The ID of the question in the questions table</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_ORDER}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The order number when output</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_TEXT}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The text of the question from a resource</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_TEXT_RAW}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">Just the text of the question</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_URL}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The URL to the question on the page</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_USER_NAME}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The user name of the question poster</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_USER_EMAIL}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The email address of the question poster</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_ADDED_DATE}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The question's date formated of when it was added</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_ADDED_TIMESTAMP}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The question's timestamp of when it was added</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_CATEGORY_TITLE}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The title of the category the question is in</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_CATEGORY_CODE}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The unique code of the category the question is in</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_LINK}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">The question text formated into a link from a resource</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_LINK_WITHORDER}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS</td>
+						<td class="cell">the question text formated into a link from a resource with the question order number</td>
+					</tr>
+
+					<tr>
+						<td class="cell block-sep" colspan="3">
+							<h3 id="MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN">MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN</h3>
+							<p>Options for a user if they are an admin</p>
+						</td>
+					</tr>					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_DELETE_URL}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN</td>
+						<td class="cell">The URL to delete the question</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_DELETE_LINK}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN</td>
+						<td class="cell">The link formatted from a resource to delete the question</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_EDIT_URL}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN</td>
+						<td class="cell">The URL to edit the question</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QAA_QUESTION_EDIT_LINK}</td>
+						<td class="cell">MAIN.FAQ_QUESTIONS_AND_ANSWERS.IS_ADMIN</td>
+						<td class="cell">The link formatted from a resource to delete the question</td>
+					</tr>		
+					<tr>
+						<td class="cell block-sep" colspan="3">
+							<h3 id="MAIN.FAQ_QUESTION_ADD">MAIN.FAQ_QUESTION_ADD</h3>
+							<p>Options and form inputs for users and guests that have write access</p>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="cell">{FAQ_QUESTION_ADD_FORM_SEND}</td>
+						<td class="cell">MAIN.FAQ_QUESTION_ADD</td>
+						<td class="cell">The URL for POSTing the add questin form</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QUESTION_ADD_TEXT}</td>
+						<td class="cell">MAIN.FAQ_QUESTION_ADD</td>
+						<td class="cell">The question text to submit</td>
+					</tr>
+					<tr>
+						<td class="cell block-sep" colspan="3">
+							<h3 id="MAIN.FAQ_QUESTION_ADD.GUEST">MAIN.FAQ_QUESTION_ADD.GUEST</h3>
+							<p>Options and form inputs for guests that have write access</p>
+						</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QUESTION_ADD_VERIFY}</td>
+						<td class="cell">MAIN.FAQ_QUESTION_ADD.GUEST</td>
+						<td class="cell">The CAPTCHA verify input box</td>
+					</tr>
+					<tr>
+						<td class="cell">{FAQ_QUESTION_ADD_VERIFYIMG}</td>
+						<td class="cell">MAIN.FAQ_QUESTION_ADD.GUEST</td>
+						<td class="cell">The generated CAPTCHA for verify</td>
+					</tr>	
+					<tr>
+						<td class="cell">{FAQ_QUESTION_ADD_GUEST_USERNAME}</td>
+						<td class="cell">MAIN.FAQ_QUESTION_ADD.GUEST</td>
+						<td class="cell">A inputbox for the user to type a user name</td>
+					</tr>	
+					<tr>
+						<td class="cell">{FAQ_QUESTION_ADD_GUEST_EMAIL}</td>
+						<td class="cell">MAIN.FAQ_QUESTION_ADD.GUEST</td>
+						<td class="cell">A inputbox for the user to type a email address</td>
+					</tr>
+				</table>
+			</div>
+
+		</div>
+	<body>
