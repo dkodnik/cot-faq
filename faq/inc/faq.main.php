@@ -9,8 +9,6 @@ require_once cot_incfile('faq', 'module', 'resources');
 $out['subtitle'] = $L['FAQ'];
 $c = cot_import('c', 'G', 'TXT');
 
-require_once $cfg['system_dir'] . '/header.php';
-
 $faq_structure = $structure['faq'];
 if(!array_key_exists($c, $faq_structure) || empty($c))
 {
@@ -32,6 +30,11 @@ elseif($faq_order_default == 'chron')
 elseif($faq_order_default == 'alpha')
 {
 	$faq_order = "q.question_position ASC, q.question_text ASC";
+}
+
+foreach (cot_getextplugins('faq.main.import') as $pl)
+{
+	include $pl;
 }
 
 if($cache)
@@ -60,7 +63,14 @@ $subcats = empty($c) ? $faq_structure_toplevel : cot_structure_children('faq', $
 $subcats_count = empty($c) ? $faq_structure_toplevel : cot_structure_children('faq', $c, false, false);
 $faq_has_subcategories = count($subcats_count) > 0 ? true : false; 
 
+foreach (cot_getextplugins('faq.main.first') as $pl)
+{
+	include $pl;
+}
+
+require_once $cfg['system_dir'] . '/header.php';
 $t = new XTemplate(cot_tplfile(array('faq', $faq_structure[$c]['tpl'])));
+
 foreach($subcats as $cat)
 {	
 	$category_itemcount_total = 0;
@@ -189,6 +199,11 @@ else
 	$t->parse('MAIN.FAQ_NO_QUESTIONS');
 }
 
+foreach (cot_getextplugins('faq.main.main') as $pl)
+{
+	include $pl;
+}
+
 if($usr['auth_write'] && !$faq_structure[$c]['locked'])
 {
 	$t->assign(array(
@@ -219,6 +234,11 @@ $t->assign(array(
 	'FAQ_PATH' => cot_breadcrumbs($faq_structure_fullpath, false),
 	'FAQ_TITLE' => $L['FAQ'],
 ));
+
+foreach (cot_getextplugins('faq.main.tags') as $pl)
+{
+	include $pl;
+}
 
 cot_display_messages($t);
 $t->parse('MAIN');
