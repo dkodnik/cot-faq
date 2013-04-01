@@ -44,7 +44,8 @@ cot_check(mb_strlen($rquestion['question_text']) < 2, 'faq_question_tooshort', '
 
 if($usr['id'] == 0)
 {
-	if(!cot_check_email($rquestion['question_useremail'])) {
+	if(!cot_check_email($rquestion['question_useremail'])) 
+	{
 		cot_error('aut_emailtooshort', 'rquestionemail');
 	}
 	cot_check(mb_strlen($rquestion['question_username']) < 2, 'aut_usernametooshort', 'rquestionname');
@@ -62,6 +63,7 @@ if(!cot_error_found())
 	{
 		include $pl;
 	}
+	cot_shield_update(15, "New question");
 	cot_message('faq_question_successfully_added');
 	cot_redirect(cot_url('faq', 'c='.$c, '', true));
 }

@@ -6,13 +6,22 @@ require_once cot_incfile('forms');
 require_once cot_langfile('faq', 'module');
 require_once cot_incfile('faq', 'module', 'resources');
 
-$out['subtitle'] = $L['FAQ'];
 $c = cot_import('c', 'G', 'TXT');
 
 $faq_structure = $structure['faq'];
-if(!array_key_exists($c, $faq_structure) || empty($c))
+if(!array_key_exists($c, $faq_structure) && !empty($c))
+{
+	cot_die_message(404);
+}
+
+if(empty($c))
 {
 	$c = '';
+	$out['subtitle'] = $L['FAQ'];
+}
+else
+{
+	$out['subtitle'] = cot_title('{CATEGORY} - {FAQ}', array('CATEGORY' => $faq_structure[$c]['title'], 'FAQ' => $L['FAQ']));
 }
 
 list($usr['auth_read'], $usr['auth_write'], $usr['isadmin']) = cot_auth('faq', (!empty($c) ? $c : 'a'));
