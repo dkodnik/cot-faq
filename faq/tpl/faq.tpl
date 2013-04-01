@@ -11,7 +11,7 @@
 
 		<!-- IF {PHP.faq_has_questions} -->
 
-			<div class="odd width70" style="border: 1px solid #eee;">
+			<div class="odd width80" style="border: 1px solid #eee;">
 				<ul style="padding: 7px; padding-top: 10px; line-height: 200%;">
 				<!-- BEGIN: FAQ_LIST_QUESTIONS -->
 					<li style="padding-bottom: 3px;">{FAQ_LIST_QUESTION_LINK}</li>

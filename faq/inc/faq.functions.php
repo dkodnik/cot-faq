@@ -90,8 +90,16 @@ function faq_question_add($rquestion)
 	}
 	$rquestion['question_position'] = (empty($rquestion['question_position'])) ? 999 : $rquestion['question_position'];
 	$rquestion['question_cat'] = $rquestion['question_cat'] == FAQ_EMPTY_CAT_CODE ? '' : $rquestion['question_cat'];
+	foreach (cot_getextplugins('faq.add.add.query') as $pl)
+	{
+		include $pl;
+	}
 	if($db->insert($db_faq_questions, $rquestion))
 	{
+		foreach (cot_getextplugins('faq.add.add.done') as $pl)
+		{
+			include $pl;
+		}
 		if($rquestion['question_approved'] == 1)
 		{
 			faq_structure_cache_remove($rquestion['question_cat']);
@@ -119,6 +127,12 @@ function faq_question_update($rquestion)
 	$row = $db->query("SELECT question_approved,question_cat,question_position FROM $db_faq_questions WHERE question_id=? LIMIT 1", $rquestion['question_id'])->fetch();
 	$rquestion['question_position'] = ($row['question_position'] != $rquestion['question_position'] && isset($rquestion['question_position'])) ? $rquestion['question_position'] : $row['question_position'];
 	$rquestion['question_position'] = ($rquestion['question_position'] == 0) ? 999 : $rquestion['question_position'];
+	
+	foreach (cot_getextplugins('faq.update.first') as $pl)
+	{
+		include $pl;
+	}
+
 	if($row['question_approved'] != $rquestion['question_approved'] && $row['question_cat'] == $rquestion['question_cat'])
 	{
 		faq_structure_adjust_count($row['question_cat'], $rquestion['question_approved']);
@@ -138,15 +152,22 @@ function faq_question_update($rquestion)
 			$structure_updated = TRUE;
 		}
 	}
+
+	foreach (cot_getextplugins('faq.update.query') as $pl)
+	{
+		include $pl;
+	}
+
 	if($structure_updated)
 	{
 		$cache && $cache->db->remove('structure', 'system');
 	}
 	faq_structure_cache_remove($rquestion['question_cat']);
+
 	return $db->update($db_faq_questions, $rquestion, 'question_id=?', $rquestion['question_id'], true);
 }
 
-function faq_question_delete($id, $rquestion)
+function faq_question_delete($id, $rquestion = array())
 {
 	global $db_faq_questions, $db, $cache;
 	$id = (int)$id;
@@ -164,6 +185,10 @@ function faq_question_delete($id, $rquestion)
 	}
 	$structure_updated = FALSE;
 	$deleted = $db->delete($db_faq_questions, 'question_id=?', array($id));
+	foreach (cot_getextplugins('faq.delete.done') as $pl)
+	{
+		include $pl;
+	}
 	if($deleted)
 	{
 		$structure_updated = TRUE;

@@ -7,6 +7,11 @@ $c = cot_import('c', 'G', 'TXT');
 list($usr['auth_read'], $usr['auth_write'], $usr['isadmin']) = cot_auth('faq', (!empty($c) ? $c : 'a'));
 cot_block($usr['auth_write']);
 
+if(!empty($c) && $structure['faq'][$c]['locked'])
+{
+	cot_die_message(404, TRUE);	
+}
+
 require_once cot_langfile('faq', 'module');
 
 cot_check_xp();
@@ -19,6 +24,11 @@ $rquestion['question_added'] = $sys['now'];
 $rquestion['question_text'] = cot_import('rquestiontext', 'P', 'TXT');
 $rquestion['question_approved'] = 0;
 $rquestion['question_cat'] = $c;
+
+foreach (cot_getextplugins('faq.add.import') as $pl)
+{
+	include $pl;
+}
 
 if($usr['id'] == 0 && !empty($cot_captcha))
 {
@@ -40,9 +50,18 @@ if($usr['id'] == 0)
 	cot_check(mb_strlen($rquestion['question_username']) < 2, 'aut_usernametooshort', 'rquestionname');
 }
 
+foreach (cot_getextplugins('faq.add.error') as $pl)
+{
+	include $pl;
+}
+
 if(!cot_error_found())
 {
 	faq_question_add($rquestion);
+	foreach (cot_getextplugins('faq.add.done') as $pl)
+	{
+		include $pl;
+	}
 	cot_message('faq_question_successfully_added');
 	cot_redirect(cot_url('faq', 'c='.$c, '', true));
 }

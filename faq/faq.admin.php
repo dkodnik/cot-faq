@@ -41,6 +41,11 @@ $s = cot_import('s', 'G', 'BOL');
 $v = cot_import('v', 'G', 'ALP');
 $op = cot_import('op', 'G', 'BOL');
 
+foreach (cot_getextplugins('faq.admin.import') as $pl)
+{
+	include $pl;
+}
+
 list($pg, $d, $durl) = cot_import_pagenav('d', $cfg['maxrowsperpage']);
 
 if($faq_uses_categories)
@@ -65,6 +70,11 @@ else
 }
 
 $common_params = '&d='.$durl.'&filter='.$filter.'&sorttype='.$sorttype.'&sortway='.$sortway.'&op='.$op;
+
+foreach (cot_getextplugins('faq.admin.first') as $pl)
+{
+	include $pl;
+}
 
 $adminpath[] = array(cot_url('admin', 'm=extensions'), $L['Extensions']);
 $adminpath[] = array(cot_url('admin', 'm=extensions&a=details&mod='.$m), $cot_modules[$m]['title']);
@@ -109,6 +119,11 @@ if($a == 'main')
 		"ORDER BY $sqlsorttype $sortway $limit")->fetchAll();
 	$update_position = array();
 
+	foreach (cot_getextplugins('faq.admin.main.first') as $pl)
+	{
+		include $pl;
+	}
+
 	if($rows)
 	{
 		$items_on_page = 0;
@@ -139,6 +154,12 @@ if($a == 'main')
 		cot_check_xp();
 		$changed = 0;
 		$rquestionpositions = cot_import('rquestionpositions', 'P', 'ARR');
+
+		foreach (cot_getextplugins('faq.admin.main.update') as $pl)
+		{
+			include $pl;
+		}
+
 		if(is_array($rquestionpositions) && count($rquestionpositions) > 0)
 		{
 			foreach($rquestionpositions as $qid => $qpos)
@@ -161,6 +182,12 @@ if($a == 'main')
 
 	$totalitems = $db->query("SELECT COUNT(*) FROM $db_faq_questions WHERE ".$sqlwhere)->fetchColumn();
 	$pagenav = cot_pagenav('admin','m=faq'.$common_params, $d, $totalitems, $cfg['maxrowsperpage'], 'd');
+	
+	foreach (cot_getextplugins('faq.admin.main.main') as $pl)
+	{
+		include $pl;
+	}
+
 	$t->assign(array(
 		'ADMIN_FAQ_TOTALITEMS' => $totalitems,
 		'ADMIN_FAQ_FORM_UPDATE_URL' => cot_url('admin', 'm=faq&a=main&v=update'.$common_params),
@@ -206,26 +233,43 @@ if($a == 'manage')
 		$rquestion['question_useremail'] = cot_import('rquestionemail', 'P', 'TXT', 64);
 		$rquestion['question_position'] = cot_import('rquestionposition', 'P', 'TXT', 5);
 
+		foreach (cot_getextplugins('faq.admin.manage.update.first') as $pl)
+		{
+			include $pl;
+		}
 		if(empty($rquestion['question_answer']) && $rquestion['question_approved'] == 1)
 		{
 			$rquestion['question_approved'] = 0;
 			cot_error('faq_empty_answer_approved');
 		}
 
-		cot_check(mb_strlen($rquestion['question_text'])<2, 'faq_question_tooshort', 'rquestiontext');
+		cot_check(mb_strlen($rquestion['question_text']) < 2, 'faq_question_tooshort', 'rquestiontext');
 		cot_check(mb_strlen($rquestion['question_text']) > 255, 'faq_question_toolong', 'rquestiontext');
 		
+		foreach (cot_getextplugins('faq.admin.update.error') as $pl)
+		{
+			include $pl;
+		}
+
 		if(!cot_error_found())
 		{
 			if(!empty($rquestion['question_id']))
 			{
 				faq_question_update($rquestion);
+				foreach (cot_getextplugins('faq.admin.manage.update.done') as $pl)
+				{
+					include $pl;
+				}
 			}
 			else
 			{
 				$rquestion['question_added'] = $sys['now'];
 				$rquestion['question_userid'] = $usr['id'];
 				faq_question_add($rquestion);
+				foreach (cot_getextplugins('faq.admin.manage.add.done') as $pl)
+				{
+					include $pl;
+				}
 			}
 
 			cot_message('faq_question_successfully_updated');
@@ -252,6 +296,11 @@ if($a == 'manage')
 		$question_useremail = cot_inputbox('text', 'rquestionemail', $row['question_useremail'], array('size' => '64', 'maxlength' => '100'));
 	}
 
+	foreach (cot_getextplugins('faq.admin.manage.main') as $pl)
+	{
+		include $pl;
+	}
+
 	$t->assign(array(
 		'ADMIN_FAQ_MANAGE_QUESTION_ID' => $id,
 		'ADMIN_FAQ_MANAGE_QUESTION_POSITION' => cot_inputbox('text', 'rquestionposition', $row['question_position']==999 ? '' : $row['question_position'], array('style' => 'width: 50px;')),
@@ -265,6 +314,10 @@ if($a == 'manage')
 		'ADMIN_FAQ_MANAGE_FORM_DELETE_URL' => cot_url('admin', 'm=faq&a=delete&id='.$id.$common_params.'&'.cot_xg()),
 		'ADMIN_FAQ_MANAGE_FORM_UPDATE_URL' => cot_url('admin', 'm=faq&a=manage&v=update&id='.$id.$common_params),
 	));
+	foreach (cot_getextplugins('faq.admin.manage.tags') as $pl)
+	{
+		include $pl;
+	}
 }
 
 $t->assign(array(
@@ -272,6 +325,11 @@ $t->assign(array(
 ));
 
 cot_display_messages($t);
+
+foreach (cot_getextplugins('faq.admin.tags') as $pl)
+{
+	include $pl;
+}
 $t->parse('MAIN');
 $adminmain = $t->text();
 
