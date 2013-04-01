@@ -4,6 +4,7 @@
 Name=FAQ
 Description=A general purpose FAQ system
 Version=1.0
+Category=forms-feedback
 Date=2012-03-30
 Author=tyler@xaez.org
 Copyright=
