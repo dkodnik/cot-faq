@@ -1,10 +1,5 @@
-<?php
 
-$db_faq_questions = (isset($db_faq_questions)) ? $db_faq_questions : $db_x.'faq_questions';
-
-$db->query("
-
-CREATE TABLE IF NOT EXISTS `".$db_faq_questions."` (
+CREATE TABLE IF NOT EXISTS `cot_faq_questions` (
   `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `question_userid` int(11) NOT NULL DEFAULT '0',
   `question_useremail` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -19,5 +14,3 @@ CREATE TABLE IF NOT EXISTS `".$db_faq_questions."` (
   KEY `question_cat` (`question_cat`),
   KEY `question_approved` (`question_approved`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
-
-");
