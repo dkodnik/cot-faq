@@ -94,17 +94,23 @@ foreach($subcats as $cat)
 		continue;
 	}
 
-	$t->assign(array(
-		'FAQ_CATEGORY_URL' => cot_url('faq', 'c='.$cat),
-		'FAQ_CATEGORY_ID' => (int)$faq_structure[$cat]['id'],
-		'FAQ_CATEGORY_DESC' => htmlspecialchars($faq_structure[$cat]['desc']),
-		'FAQ_CATEGORY_TITLE' => htmlspecialchars($faq_structure[$cat]['title']),
-		'FAQ_CATEGORY_ICON_URL' => $faq_structure[$cat]['icon'],
-		'FAQ_CATEGORY_CODE' => htmlspecialchars($cat),
-		'FAQ_CATEGORY_QUESTION_COUNT' => (int)$faq_structure[$cat]['count'],
-		'FAQ_CATEGORY_QUESTION_COUNT_TOTAL' => (int)$category_itemcount_total,
-	));
-	$t->parse('MAIN.FAQ_CATEGORIES');
+	$show_category = (isset($cfg['faq']['cat_'.$cat]['show_category'])) ? (bool)$cfg['faq']['cat_'.$cat]['show_category'] : (bool)$cfg['faq']['cat___default']['show_category'];
+	$show_category = isset($cfg['faq']['cat___default']['show_category']) ? $show_category : TRUE;
+
+	if($show_category)
+	{
+		$t->assign(array(
+			'FAQ_CATEGORY_URL' => cot_url('faq', 'c='.$cat),
+			'FAQ_CATEGORY_ID' => (int)$faq_structure[$cat]['id'],
+			'FAQ_CATEGORY_DESC' => htmlspecialchars($faq_structure[$cat]['desc']),
+			'FAQ_CATEGORY_TITLE' => htmlspecialchars($faq_structure[$cat]['title']),
+			'FAQ_CATEGORY_ICON_URL' => $faq_structure[$cat]['icon'],
+			'FAQ_CATEGORY_CODE' => htmlspecialchars($cat),
+			'FAQ_CATEGORY_QUESTION_COUNT' => (int)$faq_structure[$cat]['count'],
+			'FAQ_CATEGORY_QUESTION_COUNT_TOTAL' => (int)$category_itemcount_total,
+		));
+		$t->parse('MAIN.FAQ_CATEGORIES');
+	}
 }
 if($rowscount>0)
 {

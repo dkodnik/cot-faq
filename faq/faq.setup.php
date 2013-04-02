@@ -20,6 +20,10 @@ Recommends_plugins=
 [BEGIN_COT_EXT_CONFIG]
 order=01:callback:faq_config_order():chron:
 [END_COT_EXT_CONFIG]
+
+[BEGIN_COT_EXT_CONFIG_STRUCTURE]
+show_category=01:radio::1:
+[END_COT_EXT_CONFIG_STRUCTURE]
 ==================== */
 
 defined('COT_CODE') or die('Wrong URL.');
