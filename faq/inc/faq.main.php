@@ -246,7 +246,7 @@ if($usr['auth_write'] && !$faq_structure[$c]['locked'])
 
 $faq_structure_fullpath = array_merge(array(array(cot_url('faq'), $L['FAQ'])), cot_structure_buildpath('faq', $c));
 $t->assign(array(
-	'FAQ_PATH' => cot_breadcrumbs($faq_structure_fullpath, false),
+	'FAQ_PATH' => (empty($c)) ? $L['FAQ'] : cot_breadcrumbs($faq_structure_fullpath, false),
 	'FAQ_TITLE' => $L['FAQ'],
 ));
 
