@@ -242,7 +242,7 @@ if($cfg['jquery'] && $cfg['faq']['animate_scroll'])
 			$('.faq_item').click(function(e){
 				e.preventDefault();
 				var id = $(this).attr('href');
-				id = id.match(/\#([a-zA-Z0-9])+/);
+				id = id.match(/\#q([0-9])+/);
 				id = id[0];
 
 				if($(id).length != 0)
