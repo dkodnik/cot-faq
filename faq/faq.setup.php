@@ -20,6 +20,7 @@ Recommends_plugins=
 [BEGIN_COT_EXT_CONFIG]
 order=01:callback:faq_config_order():chron:
 maxrowsperpage=02:string::50:
+animate_scroll=03:radio::1
 [END_COT_EXT_CONFIG]
 
 [BEGIN_COT_EXT_CONFIG_STRUCTURE]

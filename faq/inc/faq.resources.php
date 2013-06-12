@@ -1,7 +1,7 @@
 <?php
 
-$R['faq_list_question_link'] = '<a href="{$url}">{$question}</a>';
-$R['faq_list_question_link_withorder'] = '<a href="{$url}">{$order}. {$question}</a>';
+$R['faq_list_question_link'] = '<a class="{$class}" href="{$url}">{$question}</a>';
+$R['faq_list_question_link_withorder'] = '<a class="{$class}" href="{$url}">{$order}. {$question}</a>';
 $R['faq_qaa_question_text_link'] = '<a href="{$url}" id="{$id}">{$question}</a>';
 $R['faq_qaa_question_text'] = '<span id="{$id}"">{$question}</span>';
 $R['faq_qaa_question_text_link_withorder'] = '<a href="{$url}" id="{$id}">{$order}. {$question}</a>';

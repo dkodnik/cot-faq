@@ -34,6 +34,7 @@ $L['faq_admin_onepage'] = 'Display all on one page?';
 $L['cfg_order'] = 'Default sorting for questions with the same “position” value';
 $L['cfg_show_category'] = 'Show category in category lists ?';
 $L['cfg_maxrowsperpage'] = 'Questions per page';
+$L['cfg_animate_scroll'] = 'Animate scrolling to question ? ( requires jQuery configuration to be enabled )';
 
 $L['faq_config_alpha'] = 'Alphabetical';
 $L['faq_config_chron'] = 'Chronological';

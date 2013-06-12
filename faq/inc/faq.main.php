@@ -106,7 +106,7 @@ if($rowscount>0)
 	$qorder = 1;
 	foreach($rows as $row)
 	{
-		$question_url = cot_url('faq', 'c='.$c, '#q'.$qorder);
+		$question_url = cot_url('faq', 'c='.$c.'&d='.$durl, '#q'.$qorder);
 		$question_text = htmlspecialchars($row['question_text']);
 		$question_username = (!empty($row['user_name'])) ? $row['user_name'] : $row['question_username']; 
 		$question_useremail = (!empty($row['user_email'])) ? $row['user_email'] : $row['question_email'];
@@ -129,12 +129,14 @@ if($rowscount>0)
 			'FAQ_LIST_QUESTION_CATEGORY_CODE' => $question_cat,
 			'FAQ_LIST_QUESTION_LINK' => cot_rc('faq_list_question_link', 
 				array(
+					'class' => 'faq_item',
 					'url' => $question_url, 
 					'question' => $question_text,
 					'order' => $qorder,
 				)),
 			'FAQ_LIST_QUESTION_LINK_WITHORDER' => cot_rc('faq_list_question_link_withorder', 
 				array(
+					'class' => 'faq_item',
 					'url' => $question_url, 
 					'question' => $question_text,
 					'order' => $qorder,
@@ -231,6 +233,27 @@ if($usr['auth_write'] && !$faq_structure[$c]['locked'])
 		$t->parse('MAIN.FAQ_QUESTION_ADD.GUEST');
 	}
 	$t->parse('MAIN.FAQ_QUESTION_ADD');
+}
+
+if($cfg['jquery'] && $cfg['faq']['animate_scroll'])
+{
+	cot_rc_embed_footer("
+		$(function(){
+			$('.faq_item').click(function(e){
+				e.preventDefault();
+				var id = $(this).attr('href');
+				id = id.match(/\#([a-zA-Z0-9])+/);
+				id = id[0];
+
+				if($(id).length != 0)
+				{
+					$('html, body').animate({
+						scrollTop: $(id).offset().top
+					}, 1000);
+				}
+			});
+		});
+	");
 }
 
 $pagenav = cot_pagenav('faq','c='.$c.'&d='.$durl, $d, $rowstotal, $cfg['faq']['maxrowsperpage'], 'd');
