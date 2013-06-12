@@ -13,12 +13,13 @@ Auth_guests=R
 Lock_guests=
 Auth_members=RW
 Lock_members=
-Recommends_modules=
+Recommends_modules=users
 Recommends_plugins=
 [END_COT_EXT]
 
 [BEGIN_COT_EXT_CONFIG]
 order=01:callback:faq_config_order():chron:
+maxrowsperpage=02:string::50:
 [END_COT_EXT_CONFIG]
 
 [BEGIN_COT_EXT_CONFIG_STRUCTURE]

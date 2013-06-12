@@ -1,8 +1,6 @@
 <?php
 
 define('FAQ_EMPTY_CAT_CODE', '__none__');
-define('FAQ_CACHE_STRUCTURE_PREFIX', 'faq_structure_');
-define('FAQ_CACHE_STRUCTURE_REALM', 'faq');
 
 $db_faq_questions = (isset($db_faq_questions)) ? $db_faq_questions : $db_x.'faq_questions';
 
@@ -39,19 +37,6 @@ function faq_structure_toplevel()
 		}
 	}
 	return $top;
-}
-
-function faq_structure_cache_remove($cat)
-{
-	global $cache;
-	$cat = ($cat == FAQ_EMPTY_CAT_CODE) ? '' : $cat;
-	$cache && $cache->db->remove(FAQ_CACHE_STRUCTURE_PREFIX.$cat, FAQ_CACHE_STRUCTURE_REALM);
-}
-
-function faq_structure_cache_remove_all()
-{
-	global $cache;
-	$cache && $cache->db->clear(FAQ_CACHE_STRUCTURE_REALM);
 }
 
 function faq_structure_adjust_count($catcode, $approved_status)
@@ -102,7 +87,6 @@ function faq_question_add($rquestion)
 		}
 		if($rquestion['question_approved'] == 1)
 		{
-			faq_structure_cache_remove($rquestion['question_cat']);
 			faq_structure_adjust_count($rquestion['question_cat'], 1);
 			$cache && $cache->db->remove('structure', 'system');			
 		}
@@ -147,7 +131,6 @@ function faq_question_update($rquestion)
 		}
 		if($row['question_approved'] == 1)
 		{
-			faq_structure_cache_remove($row['question_cat']);
 			faq_structure_adjust_count($row['question_cat'], 0);
 			$structure_updated = TRUE;
 		}
@@ -162,8 +145,6 @@ function faq_question_update($rquestion)
 	{
 		$cache && $cache->db->remove('structure', 'system');
 	}
-	faq_structure_cache_remove($rquestion['question_cat']);
-
 	return $db->update($db_faq_questions, $rquestion, 'question_id=?', $rquestion['question_id'], true);
 }
 
@@ -192,7 +173,6 @@ function faq_question_delete($id, $rquestion = array())
 	if($deleted)
 	{
 		$structure_updated = TRUE;
-		faq_structure_cache_remove($rquestion['question_cat']);
 		faq_structure_adjust_count($rquestion['question_cat'], 0);
 	}
 	if($structure_updated)

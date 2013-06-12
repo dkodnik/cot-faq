@@ -41,36 +41,25 @@ elseif($faq_order_default == 'alpha')
 	$faq_order = "q.question_position ASC, q.question_text ASC";
 }
 
+list($pg, $d, $durl) = cot_import_pagenav('d', $cfg['faq']['maxrowsperpage']);
+
 foreach (cot_getextplugins('faq.main.import') as $pl)
 {
 	include $pl;
 }
 
-if($cache)
-{
-	$rows = $cache->db->get(FAQ_CACHE_STRUCTURE_PREFIX.$c, FAQ_CACHE_STRUCTURE_REALM);
-	if($rows['order'] != $faq_order_default)
-	{
-		unset($rows);
-	}
-	else
-	{
-		unset($rows['order']);
-	}
-}
-if(is_null($rows))
-{
-	$rows = $db->query("SELECT q.*,u.user_id,u.user_name,u.user_email FROM $db_faq_questions AS q ".
-		"LEFT JOIN $db_users AS u ON q.question_userid=u.user_id ".
-		"WHERE q.question_cat=? AND q.question_approved=1 ORDER BY $faq_order", $c)->fetchAll();
-	$cache && $cache->db->store(FAQ_CACHE_STRUCTURE_PREFIX.$c, $rows + array('order' => $faq_order_default), FAQ_CACHE_STRUCTURE_REALM);
-}	
+$rows = $db->query("SELECT q.*,u.user_id,u.user_name,u.user_email FROM $db_faq_questions AS q ".
+	"LEFT JOIN $db_users AS u ON q.question_userid=u.user_id ".
+	"WHERE q.question_cat=? AND q.question_approved=1 ".
+	"ORDER BY $faq_order LIMIT ".(int)$d.", ".(int)$cfg['faq']['maxrowsperpage'], $c)->fetchAll();
+	
 $rowscount = count($rows);
+$rowstotal = (int)$db->query("SELECT COUNT(*) FROM $db_faq_questions WHERE question_cat=? AND question_approved=1", $c)->fetchColumn();
 $faq_has_questions = $rowscount > 0 ? true : false;
 $faq_structure_toplevel = faq_structure_toplevel();
 $subcats = empty($c) ? $faq_structure_toplevel : cot_structure_children('faq', $c);
 $subcats_count = empty($c) ? $faq_structure_toplevel : cot_structure_children('faq', $c, false, false);
-$faq_has_subcategories = count($subcats_count) > 0 ? true : false; 
+$faq_has_subcategories = count($subcats_count) > 0 ? true : false;
 
 foreach (cot_getextplugins('faq.main.first') as $pl)
 {
@@ -230,7 +219,7 @@ if($usr['auth_write'] && !$faq_structure[$c]['locked'])
 		if(!empty($cot_captcha))
 		{
 			$t->assign(array(
-				'FAQ_QUESTION_ADD_VERIFY' => cot_inputbox('text', 'rverify', '', 'size="10" maxlength="20"'),
+				'FAQ_QUESTION_ADD_VERIFY' => cot_inputbox('text', 'rverify', '', array('size' => '15', 'maxlength' => '25')),
 				'FAQ_QUESTION_ADD_VERIFYIMG' => cot_captcha_generate(),
 
 			));
@@ -244,10 +233,24 @@ if($usr['auth_write'] && !$faq_structure[$c]['locked'])
 	$t->parse('MAIN.FAQ_QUESTION_ADD');
 }
 
+$pagenav = cot_pagenav('faq','c='.$c.'&d='.$durl, $d, $rowstotal, $cfg['faq']['maxrowsperpage'], 'd');
+
 $faq_structure_fullpath = array_merge(array(array(cot_url('faq'), $L['FAQ'])), cot_structure_buildpath('faq', $c));
 $t->assign(array(
 	'FAQ_PATH' => (empty($c)) ? $L['FAQ'] : cot_breadcrumbs($faq_structure_fullpath, false),
 	'FAQ_TITLE' => $L['FAQ'],
+	'FAQ_PAGENAV_MAIN' => $pagenav['main'],
+	'FAQ_PAGENAV_NEXT' => $pagenav['next'],
+	'FAQ_PAGENAV_PREV' => $pagenav['prev'],
+	'FAQ_PAGENAV_LAST' => $pagenav['last'],
+	'FAQ_PAGENAV_CURRENT' => $pagenav['current'],
+	'FAQ_PAGENAV_FIRSTLINK' => $pagenav['firstlink'],
+	'FAQ_PAGENAV_PREVLINK' => $pagenav['prevlink'],
+	'FAQ_PAGENAV_NEXTLINK' => $pagenav['nextlink'],
+	'FAQ_PAGENAV_LASTLINK' => $pagenav['lastlink'],
+	'FAQ_PAGENAV_TOTAL' => $pagenav['total'],
+	'FAQ_PAGENAV_ONPAGE' => $pagenav['onpage'],
+	'FAQ_PAGENAV_ENTRIES' => $pagenav['entries'],
 ));
 
 foreach (cot_getextplugins('faq.main.tags') as $pl)

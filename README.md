@@ -11,7 +11,7 @@
 
 ## Installation
 
-1. Copy the plugin to your Cotonti plugins folder
+1. Copy the module to your Cotonti modules folder
 2. Install it in Administration / Extensions
 
 ## Categories
@@ -28,4 +28,4 @@ A couple of useful variables for template condition blocks to alter you template
 - `{PHP.faq_has_subcategories}`: a boolean that states whether the current FAQ category has subcategories
 - `{PHP.faq_has_questions}`: a boolean that states whether the current FAQ category (even on the default page) has questions
 
-You can find further documentation about available tags and blocks under the `/docs` directory included with this plugin. 
+You can find further documentation about available tags and blocks under the `/docs` directory included with this module. 

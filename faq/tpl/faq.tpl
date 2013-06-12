@@ -37,6 +37,10 @@
 			</div>
 			<!-- END: FAQ_QUESTIONS_AND_ANSWERS -->
 
+			<div>
+				{FAQ_PAGENAV_NEXT} {FAQ_PAGENAV_MAIN} {FAQ_PAGENAV_PREV}
+			</div>
+
 		<!-- ENDIF -->
 	</div>
 
