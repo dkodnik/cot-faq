@@ -3,9 +3,9 @@
 [BEGIN_COT_EXT]
 Name=FAQ
 Description=A general purpose FAQ system
-Version=1.0
+Version=1.1
 Category=forms-feedback
-Date=2012-03-30
+Date=2013-06-13
 Author=tyler@xaez.org
 Copyright=
 Notes=BSD License

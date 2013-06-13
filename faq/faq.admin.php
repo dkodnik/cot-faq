@@ -175,7 +175,6 @@ if($a == 'main')
 		}
 		if($changed>0) 
 		{
-			faq_structure_cache_remove_all();
 			cot_redirect(cot_url('admin', 'm=faq'.$common_params, '', true));
 		}
 	}
